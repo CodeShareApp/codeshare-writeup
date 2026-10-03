@@ -1,0 +1,10 @@
+[tools]
+typst = "0.15"
+
+[tasks.build]
+description = "Compiles the write-up to codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty].pdf"
+run = "./build.sh"
+
+[tasks.watch]
+description = "Recompiles on change into codeshare-watch.pdf (drafts only; share built PDFs)"
+run = "typst watch codeshare.typ codeshare-watch.pdf"
