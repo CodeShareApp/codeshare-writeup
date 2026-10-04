@@ -1,0 +1,72 @@
+# Builds both themes of the write-up and publishes them as a GitHub release when a
+# version tag is pushed:
+#
+#   git tag v2026.10.04 && git push origin v2026.10.04
+#
+# Assets keep fixed names, so these links always serve the newest release:
+#   https://github.com/moroz/codeshare-writeup/releases/latest/download/codeshare.pdf
+#   https://github.com/moroz/codeshare-writeup/releases/latest/download/codeshare-light.pdf
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TYPST_VERSION: v0.15.0
+      PLEX_SANS: "@ibm/plex-sans@1.1.0"
+      PLEX_MONO: "@ibm/plex-mono@1.1.0"
+      TZ: Europe/Amsterdam
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Typst
+        run: |
+          curl -fsSL "https://github.com/typst/typst/releases/download/$TYPST_VERSION/typst-x86_64-unknown-linux-musl.tar.xz" \
+            | tar xJ -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/typst-x86_64-unknown-linux-musl" >> "$GITHUB_PATH"
+
+      - name: Install IBM Plex Sans and Mono
+        run: |
+          mkdir -p "$RUNNER_TEMP/fonts"
+          for spec in "$PLEX_SANS" "$PLEX_MONO"; do
+            name=${spec%@*}; name=${name#@ibm/}
+            curl -fsSL -o "$RUNNER_TEMP/$name.zip" \
+              "https://github.com/IBM/plex/releases/download/$(printf %s "$spec" | sed 's/@/%40/g; s#/#%2F#g')/ibm-$name.zip"
+            unzip -q "$RUNNER_TEMP/$name.zip" -d "$RUNNER_TEMP/$name"
+            find "$RUNNER_TEMP/$name" -path '*fonts/complete/otf/*.otf' -exec cp {} "$RUNNER_TEMP/fonts/" \;
+          done
+          ls "$RUNNER_TEMP/fonts" | grep -q '^IBMPlexSans-Regular.otf$'
+          ls "$RUNNER_TEMP/fonts" | grep -q '^IBMPlexMono-Regular.otf$'
+
+      # Everything but the PDFs stays outside the checkout, or build.sh would see
+      # untracked files and name the PDFs -dirty.
+      - name: Build both themes
+        env:
+          TYPST_ARGS: --font-path ${{ runner.temp }}/fonts
+        run: |
+          ./build.sh > "$RUNNER_TEMP/built.txt"
+          cat "$RUNNER_TEMP/built.txt"
+          if grep -q -- '-dirty' "$RUNNER_TEMP/built.txt"; then echo "dirty build" >&2; exit 1; fi
+          cp "$(grep -v -- '-light\.pdf$' "$RUNNER_TEMP/built.txt")" "$RUNNER_TEMP/codeshare.pdf"
+          cp "$(grep -- '-light\.pdf$' "$RUNNER_TEMP/built.txt")" "$RUNNER_TEMP/codeshare-light.pdf"
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" "$RUNNER_TEMP/codeshare.pdf" "$RUNNER_TEMP/codeshare-light.pdf" \
+            --title "Write-up, $TAG" \
+            --notes "The CodeShare study write-up, built from ${GITHUB_SHA::7} with Typst ${TYPST_VERSION#v}.
+
+          - \`codeshare.pdf\`: dark theme
+          - \`codeshare-light.pdf\`: light theme (day mode)
+
+          Every bon, barcode and screenshot value in the document is fictitious."

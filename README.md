@@ -36,3 +36,12 @@ theme), or plainly `typst compile codeshare.typ` from the repository root, addin
 - `images/` — the app icon and an app screenshot.
 - `dark.tmTheme` — syntax-highlighting theme for code blocks in the dark version (the light
   version uses Typst's default highlighting).
+
+## Releases
+
+Pushing a version tag (`git tag v2026.10.04 && git push origin v2026.10.04`) runs
+`.github/workflows/release.yml`, which builds both themes and publishes them as a GitHub
+release. The assets keep fixed names, so these links always serve the newest one:
+
+- <https://github.com/moroz/codeshare-writeup/releases/latest/download/codeshare.pdf> (dark)
+- <https://github.com/moroz/codeshare-writeup/releases/latest/download/codeshare-light.pdf> (light)
