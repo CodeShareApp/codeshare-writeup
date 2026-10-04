@@ -1,7 +1,7 @@
 #!/bin/sh
-# Compiles codeshare.typ to codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty][-light].pdf: local time,
+# Compiles codeshare.typ to codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty]-<theme>.pdf: local time,
 # the short commit id of the revision being built, "-dirty" if the working copy has changes,
-# "-light" for the day-mode theme. With no argument it builds both themes; `./build.sh dark`
+# and the theme, dark or light. With no argument it builds both themes; `./build.sh dark`
 # or `./build.sh light` builds one. Extra typst options (e.g. --font-path) go in $TYPST_ARGS.
 # With jj (colocated): the revision is @- and "dirty" means @ is not empty. Without jj
 # (a plain git clone): HEAD and `git status --porcelain`.
@@ -22,8 +22,7 @@ base="codeshare-$(date +%Y%m%d-%H%M)-$sha"
 themes=${1:-"dark light"}
 for theme in $themes; do
     case $theme in
-        dark) out="$base.pdf" ;;
-        light) out="$base-light.pdf" ;;
+        dark | light) out="$base-$theme.pdf" ;;
         *) echo "unknown theme: $theme (dark or light)" >&2; exit 1 ;;
     esac
     # shellcheck disable=SC2086

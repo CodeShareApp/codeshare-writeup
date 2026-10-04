@@ -5,9 +5,12 @@ codeshare-web in `~/working/codeshare/`). **Public:** fresh history, meant to be
 
 - **Always build with `mise run build`.** It builds both themes, dark (default) and light
   (`--input theme=light`, palettes in `lib.typ`). PDFs carry the build timestamp and the
-  source revision in their name (`codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty][-light].pdf`,
-  `build.sh`); they are git-ignored. Colours come only from the palettes: no `rgb(...)`
-  in chapters, so both themes stay legible. Commit (`jj commit`) before building one to share, so it isn't `-dirty`.
+  source revision in their name (`codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty]-{dark,light}.pdf`,
+  `build.sh`); they are git-ignored. Release assets keep these names (timestamp and
+  shasum included); never rename them to fixed names. Links to a release point at that
+  release's own assets (`releases/download/<tag>/<file>`), not `latest/download`.
+  Colours come only from the palettes: no `rgb(...)` in chapters, so both themes stay
+  legible. Commit (`jj commit`) before building one to share, so it isn't `-dirty`.
 - Neutral technical-report register. Device keys are on NIST P-256, called "the glowie
   curve" throughout (introduced with a footnote at first use, chapter 2, and in the
   glossary); library identifiers like `SecureEnclave.P256` keep their names.

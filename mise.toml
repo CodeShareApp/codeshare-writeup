@@ -2,7 +2,7 @@
 typst = "0.15"
 
 [tasks.build]
-description = "Compiles the write-up to codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty][-light].pdf, both themes"
+description = "Compiles the write-up to codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty]-{dark,light}.pdf"
 run = "./build.sh"
 
 [tasks.watch]

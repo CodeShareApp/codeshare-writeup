@@ -15,7 +15,7 @@ With [mise](https://mise.jdx.dev/):
 
 ```sh
 mise trust
-mise run build    # → codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty].pdf        (dark)
+mise run build    # → codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty]-dark.pdf
                   #   codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty]-light.pdf  (day mode)
 ```
 
@@ -41,7 +41,7 @@ theme), or plainly `typst compile codeshare.typ` from the repository root, addin
 
 Pushing a version tag (`git tag v2026.10.04 && git push origin v2026.10.04`), or running the
 Release workflow from the Actions tab with a version, runs `.github/workflows/release.yml`,
-which builds both themes and publishes them as a GitHub release. The assets keep fixed names, so these links always serve the newest one:
-
-- <https://github.com/moroz/codeshare-writeup/releases/latest/download/codeshare.pdf> (dark)
-- <https://github.com/moroz/codeshare-writeup/releases/latest/download/codeshare-light.pdf> (light)
+which builds both themes and publishes them as a GitHub release. The assets keep the
+build names, timestamp and commit included (`codeshare-<YYYYMMDD-HHMM>-<sha>-dark.pdf`,
+`…-light.pdf`), so every copy can be traced to its source. Link to a release's own assets
+(`releases/download/<tag>/<file>`).
