@@ -1,6 +1,11 @@
-// Shared styles and helpers for the CodeShare write-up (dark mode, iPad page).
+// Shared styles and helpers for the CodeShare write-up (iPad page).
+// Two themes: dark (default) and light, picked with `--input theme=light` (see build.sh).
 
-#let c = (
+#let theme = sys.inputs.at("theme", default: "dark")
+#assert(theme in ("dark", "light"), message: "theme must be dark or light, got " + theme)
+#let dark = theme == "dark"
+
+#let c-dark = (
   bg: rgb("#0E1513"),
   panel: rgb("#16201E"),
   panel2: rgb("#1B2825"),
@@ -18,7 +23,37 @@
   violet: rgb("#C9B3F5"),
   paper: rgb("#DAD8D0"),
   ink: rgb("#1C1C1A"),
+  strong: rgb("#F4FAF8"),
+  emph: rgb("#D6E4E0"),
+  code: rgb("#BDEFE5"),
 )
+
+// Day mode. Fills that carry text in `c.bg` (byte bars, step badges) need these accents
+// dark enough for white text.
+#let c-light = (
+  bg: rgb("#FAFCFB"),
+  panel: rgb("#EDF3F1"),
+  panel2: rgb("#E3EDEA"),
+  text: rgb("#16211E"),
+  muted: rgb("#5E6F69"),
+  accent: rgb("#0D766B"),
+  teal: rgb("#9DD6CD"),
+  deep: rgb("#CDEBE5"),
+  hair: rgb("#D3DEDA"),
+  amber: rgb("#A2600F"),
+  amberbg: rgb("#FBF2E1"),
+  red: rgb("#B42318"),
+  redbg: rgb("#FDECEA"),
+  blue: rgb("#1D6FA5"),
+  violet: rgb("#6B46C1"),
+  paper: rgb("#ECEAE2"),
+  ink: rgb("#1C1C1A"),
+  strong: rgb("#0B1311"),
+  emph: rgb("#2C3A36"),
+  code: rgb("#0B5E55"),
+)
+
+#let c = if dark { c-dark } else { c-light }
 
 #let body-font = ("IBM Plex Sans", "PingFang TC")
 #let mono-font = ("IBM Plex Mono", "PingFang TC")
@@ -241,17 +276,17 @@
   set enum(indent: 0.6em, numbering: n => text(fill: c.accent, weight: "semibold")[#n.])
   set terms(indent: 0pt, hanging-indent: 1.2em, separator: [ — ])
   show link: set text(fill: c.accent)
-  show strong: set text(weight: "semibold", fill: rgb("#F4FAF8"))
-  show emph: set text(fill: rgb("#D6E4E0"))
+  show strong: set text(weight: "semibold", fill: c.strong)
+  show emph: set text(fill: c.emph)
 
-  set raw(theme: "dark.tmTheme")
+  set raw(theme: if dark { "dark.tmTheme" } else { auto })
   show raw: set text(font: mono-font)
   show raw.where(block: false): it => box(
     fill: c.panel,
     inset: (x: 2.5pt, y: 0pt),
     outset: (y: 2.5pt),
     radius: 2pt,
-    text(size: 0.88em, fill: rgb("#BDEFE5"), it),
+    text(size: 0.88em, fill: c.code, it),
   )
   show raw.where(block: true): it => block(
     width: 100%,

@@ -100,7 +100,7 @@ voucher. The order was therefore fixed as follows:
     )
     for (i, s) in steps.enumerate() {
       let y = i * 9.4mm
-      node(0mm, y, 8mm, 7.4mm, fill: s.at(2), stroke: s.at(2), fg: c.bg)[*#s.at(0)*]
+      node(0mm, y, 8mm, 7.4mm, fill: s.at(2), stroke: s.at(2), fg: c.bg)[#text(weight: "semibold", s.at(0))]
       node(11mm, y, 125mm, 7.4mm, stroke: s.at(2), size: 7.8pt)[#align(left, s.at(1))]
       if i < 5 { arrow((4mm, y + 7.4mm), (4mm, y + 9.4mm)) }
     }

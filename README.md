@@ -15,7 +15,8 @@ With [mise](https://mise.jdx.dev/):
 
 ```sh
 mise trust
-mise run build    # → codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty].pdf
+mise run build    # → codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty].pdf        (dark)
+                  #   codeshare-<YYYYMMDD-HHMM>-<sha>[-dirty]-light.pdf  (day mode)
 ```
 
 The PDF's name carries the local build time and the short commit id of the revision it
@@ -23,13 +24,15 @@ was built from (jj's `@-`, or git's `HEAD` in a plain git clone), plus `-dirty` 
 working copy has uncommitted changes, so every copy can be traced to its source. PDFs are
 git-ignored.
 
-Without mise: `./build.sh` (needs Typst 0.15 on `PATH`), or plainly
-`typst compile codeshare.typ` from the repository root.
+Without mise: `./build.sh` (needs Typst 0.15 on `PATH`; `./build.sh light` builds one
+theme), or plainly `typst compile codeshare.typ` from the repository root, adding
+`--input theme=light` for the day-mode version.
 
 ## Layout
 
 - `codeshare.typ` — title page, contents, and the chapter includes.
-- `lib.typ` — template, colours, callouts, tables, and an EAN-13 renderer.
+- `lib.typ` — template, the dark and light palettes, callouts, tables, and an EAN-13 renderer.
 - `chapters/` — one file per chapter, plus the appendix (glossary, commands).
 - `images/` — the app icon and an app screenshot.
-- `dark.tmTheme` — syntax-highlighting theme for code blocks.
+- `dark.tmTheme` — syntax-highlighting theme for code blocks in the dark version (the light
+  version uses Typst's default highlighting).
