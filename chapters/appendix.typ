@@ -35,7 +35,8 @@
 / K: The 32-byte household key, versioned. Never sent in the clear, never used directly.
 / Key holder: A device holding a wrap of the household's current key version.
 / LWW: Last write wins: the version with the later `updatedAt` (client clock, ms) is kept.
-/ Pfandbon: The German deposit voucher; REWE's carries a 24-digit Code 128 (@sec-rewe).
+/ Pfandbon, Leergutbon: The German deposit voucher (REWE's and EDEKA's names); both samples carry
+  a Code 128, of 24 and 32 digits (@sec-rewe).
 / PDOK Locatieserver: The Dutch government's free geocoder, used by the server for new stores.
 / Secure Enclave: Apple's hardware key store. Keys created there cannot be exported.
 / Soft delete: Setting `deleted_at` instead of removing the row, so the delete can sync.
