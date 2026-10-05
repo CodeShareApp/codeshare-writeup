@@ -39,7 +39,57 @@
 - *Verification of the amount rule* against a second bon (whether the amount is indeed absent from
   the barcode).
 - *Expiry rules* per household, and the Apple Watch app (whether an Albert Heijn scanner reads an
-  EAN-13 from a watch face remains to be tested).
+  EAN-13 from a watch face remains to be tested; @sec-qr-test may make the question moot).
+- *QR codes at the till* (@sec-qr-test).
+
+== Experiment: QR codes at the till <sec-qr-test>
+
+The app shows every code in the symbology printed on the paper. The till scanners are 2D imagers
+(Zebra handhelds at the staffed tills), and such imagers decode QR as readily as EAN-13. If the
+till accepts *the same digits in a QR code*, the code screen could show QR instead of, or next to,
+the linear barcode. That would bring three gains:
+
+- *Robustness on screens.* QR has Reed–Solomon error correction and no fine module widths to
+  preserve, so a dimmed screen, a cracked protector or moiré matters less than for EAN-13.
+- *Size.* The digits fit QR's numeric mode: 13 digits (EAN-13) or even 32 (the EDEKA Leergutbon,
+  @sec-rewe) fit a version-1 symbol, 21 × 21 modules, at error-correction level M. That is small
+  enough for a watch face, where a 95-module EAN-13 is not, and avoids landscape for the wide
+  Code 128s.
+- *Generation.* CoreImage's `CIQRCodeGenerator` produces it, with the same one-pixel-per-module
+  output as the other generators.
+
+That the scanner *can* decode QR does not settle it. Three things lie between the scanner and the
+credit:
+
++ *The scanner's configuration.* Symbologies are enabled per scanner, and a retailer may have
+  enabled only the linear ones it needs.
++ *The symbology identifier.* A scanner can prefix each read with its AIM identifier (`]E0` for
+  EAN-13, `]Q1` for QR). If it does, the POS software may route or reject by it, and the same
+  13 digits arriving as QR may not be treated as a voucher.
++ *The payload.* The QR must contain exactly the digits, in numeric mode, with no newline, prefix or
+  URL. A GS1 Digital Link (`https://…/01/…`) would be parsed differently, if at all.
+
+The test therefore climbs from harmless to consequential, stopping at the first failure:
+
+#dtable(
+  columns: (auto, 1fr, 1fr),
+  header: ("Step", "Show at the till", "What a pass shows"),
+  [1], [The Bonuskaart as EAN-13, from the app (baseline).], [The till and the screen work together at all.],
+  [2], [The Bonuskaart as QR (13 digits, numeric mode, level M, 4-module quiet zone).], [The scanner has QR enabled and the POS accepts the digits from a QR. Bonus prices appear.],
+  [3], [A low-value emballagebon as QR, the paper in the other hand.], [Vouchers are credited from a QR; the screen may switch to QR for Albert Heijn.],
+  [4], [Step 2 at a self-checkout.], [The same for the self-checkout scanners, which may be a different make.],
+)
+
+For each step, the result is one of: accepted; read but refused ("onbekend artikel" or an error,
+meaning the scanner decoded it and the POS declined, which points at causes 2 or 3); or no reaction
+(the scanner did not decode it, cause 1). Step 1 must pass before any other result means
+anything. The outcome is recorded per chain and per till type. The code screen then
+picks the symbology from that record, defaulting to the one printed on the paper. Until the test
+is done, nothing changes in the app: QR display is a candidate feature, not a plan.
+
+#note[A refusal at step 3 after a pass at step 2 is the interesting case. It would mean the POS
+distinguishes vouchers by symbology, not only by digits, and that a voucher must be shown as
+printed.]
 
 == Suggested reading order
 
