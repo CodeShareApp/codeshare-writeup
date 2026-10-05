@@ -14,6 +14,8 @@
   produces a tag that detects any change to ciphertext or AAD.
 / App Group: A shared container that lets an app and its extensions (widget, share extension)
   read the same files.
+/ Biesieklette: A chain of bicycle parkings; a bike is collected by presenting the QR code it was
+  checked in with (@sec-parking).
 / Blind index: A keyed hash (here HMAC-SHA256) stored next to encrypted data so that a server can test
   equality without learning the value.
 / Bonuskaart: Albert Heijn's loyalty card; an EAN-13 barcode pinned at the top of the Home screen.

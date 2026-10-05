@@ -1,0 +1,107 @@
+#import "../lib.typ": *
+
+= Parking tags: Biesieklette <sec-parking>
+
+Like @sec-rewe, this chapter is a *specification*, not a description of built code. Biesieklette
+runs a chain of bicycle parkings. A cyclist checks in with a tag carrying a QR code and gets the
+bike back only by presenting the same code. A lost or forgotten tag
+means a bike that cannot be collected without an argument at the counter, and a tag in one
+member's pocket is no help to the member who comes to collect the bike. Both are the problems the
+app already solves for vouchers.
+
+== Anatomy of a tag
+
+#let tag-qr = ("111111100110001111111", "100000101000101000001", "101110101101001011101", "101110101001001011101", "101110100100101011101", "100000100001001000001", "111111101010101111111", "000000001010000000000", "100000101101011001110", "101010010001110110101", "110110110000101100110", "001001011001111100001", "010011110011111110010", "000000001100100000001", "111111100101010010000", "100000100100001000110", "101110100101010010000", "101110100101111001000", "101110100101110111011", "100000100011111001101", "111111101000100100100")
+
+#fig(
+  block(width: 46mm, fill: c.blue, inset: 3mm, radius: 3mm, {
+    set par(leading: 0.4em, spacing: 0.4em, justify: false)
+    text(font: mono-font, size: 9pt, weight: "bold", fill: c.bg, tracking: 0.04em)[BIESIE \ KLETTE]
+    v(2mm)
+    align(center, block(fill: c.paper, inset: 2mm, radius: 1.5mm, {
+      qr-matrix(tag-qr, module: 0.85mm, ink: c.ink, bg: c.paper)
+      v(0.5mm)
+      align(center, text(font: mono-font, size: 8pt, fill: c.ink, tracking: 0.08em)[F12345])
+    }))
+  }),
+  [A parking tag as the scanner should read it (fictitious number; the QR code is a real
+  rendering of `F12345` and decodes with an off-the-shelf reader).],
+) <fig-tag>
+
+Three tags from a photograph of the older design were decoded with zxing-cpp. Each QR code
+contains *exactly the text printed under it*: one capital letter and five digits (`F12345` in @fig-tag), as
+plain text, with no URL, prefix or check character. Newer tags look similar. From
+this:
+
+#dtable(
+  columns: (auto, 1fr),
+  header: ("Property", "Consequence"),
+  [Payload = printed id], [OCR of the printed id is a cross-check of the QR read, as the printed EAN-13 digits are for the bars, and a tag whose QR is damaged can be entered by hand.],
+  [Short alphanumeric], [Fits a version-1 QR (21 × 21 modules) in alphanumeric mode at level M; the app regenerates the code from the text instead of storing a photo.],
+  [No check character], [A one-character OCR misread produces another valid-looking id. The QR read is preferred; an id from OCR alone is confirmed by the user.],
+  [No location, no time], [The tag does not say where the bike is or since when. Both come from the phone at check-in.],
+)
+
+== How it fits the model
+
+A tag is a code like any other: payload, symbology (`qr`), label, status, timestamps. Its
+differences are in meaning, not in shape:
+
+- *Kind.* A new kind, beside vouchers and the Bonuskaart: `parking`. It has no amount.
+- *Lifecycle.* Scanning a tag at check-in creates the code with `issuedAt` = now: the bike is
+  *parked*. Collecting the bike marks it used: *collected*. The existing used/unused status covers
+  this; only the wording differs ("Parked since 08:12" and "Collected").
+- *Reuse of tags.* The same physical tag is handed out again to later cyclists. Payloads are
+  unique across all rows (`v3-unique-payload`, @sec-grdb), so a second check-in with a tag seen
+  before finds the existing row. For a parking tag, saving it again resets that row to parked with
+  the new check-in time and location, rather than reporting a duplicate.
+- *Location.* A parking is a place of a chain, like a store, but the tag prints no address. At
+  check-in the app proposes the nearest known Biesieklette parking from the phone's location
+  (MapKit), or a new one named by the user, and the user confirms.
+
+=== Privacy: the location stays sealed
+
+For vouchers, the store is a plaintext column, and stores are global rows on the server, because
+"which store does this bon belong to" is a fact printed on public paper, and the server needs it
+for nothing secret. A parking tag is different: plaintext location plus plaintext timestamps
+would tell the server where a household's bikes stand and when they were left and collected,
+day after day. For `parking` codes therefore:
+
+- the location (name and coordinates) lives *only in the sealed content* (@sec-sealed-meta); the
+  plaintext store column is empty, and no global store row is created, so the PDOK rule and the
+  squatting limits of @sec-rewe do not apply;
+- the plaintext timestamps the server needs for last-write-wins remain, as for every code. That
+  the household *changed a code* at 08:12 is visible to the server; that it parked a bike, and
+  where, is not.
+
+=== Display and sharing
+
+- *Home screen.* Parked tags appear above vouchers with "Parked since" and the parking's name.
+  Near a parking with a parked bike, the at-location card shows the tag first.
+- *Code screen.* The QR is drawn as the barcodes are (one pixel per module, whole-number scaling,
+  black on white, full brightness), with the id in large text below it for the attendant to read
+  aloud or type.
+- *Collect.* Showing the code offers "Collected", with undo, as "used" does for vouchers.
+- *Share.* The share template (@sec-share-templates) for a tag is a tag look-alike as in
+  @fig-tag, with "Kopie · CodeShare" and no logo, round-tripping payload, kind and parking name.
+
+=== Scanning
+
+`DataScannerViewController` and `VNDetectBarcodesRequest` gain `.qr`. A QR whose text matches
+`^[A-Z][0-9]{5}$` and whose surrounding text contains "Biesieklette" (or a printed id equal to
+the payload) is a parking tag; any other QR is kept as a generic code (@sec-share-templates),
+saved only after the user confirms it. The pattern is deliberately narrow and lives with the
+chain's rules, so a newer tag design with a different id shape fails into "generic", not into
+a misfiled voucher.
+
+== Open questions
+
+- *Screen at the counter.* Whether attendants accept the code from a phone screen instead of the
+  physical tag, and whether the handover requires the tag itself back. If the physical tag must be
+  returned, the app is a backup and a way to let another household member collect the bike, not a
+  replacement.
+- *Newer tags.* The id shape of the current design (one letter, five digits on the older one).
+- *Time limits and fees.* Whether a parking has a maximum stay or charges per day; if so,
+  `expires_at` gets a value at check-in and the home screen warns before it.
+- *One bike, many members.* Whether a household member who did not park the bike may collect it
+  with the code alone.

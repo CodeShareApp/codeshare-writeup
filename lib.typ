@@ -261,6 +261,25 @@
   })
 }
 
+// ---------------------------------------------------------------- QR (from a precomputed matrix)
+
+// Typst has no QR encoder of its own here; the caller passes the module matrix (rows of "0"/"1",
+// produced by a QR encoder and verified by decoding the rendered page). Quiet zone: 4 modules.
+#let qr-matrix(rows, module: 0.6mm, ink: black, bg: white) = {
+  let n = rows.len()
+  let quiet = 4
+  box(fill: bg, width: (n + 2 * quiet) * module, height: (n + 2 * quiet) * module, {
+    for (y, row) in rows.enumerate() {
+      for (x, ch) in row.clusters().enumerate() {
+        if ch == "1" {
+          place(top + left, dx: (quiet + x) * module, dy: (quiet + y) * module,
+            rect(width: module + 0.01mm, height: module + 0.01mm, fill: ink, stroke: none))
+        }
+      }
+    }
+  })
+}
+
 // ---------------------------------------------------------------- byte layout bars
 
 #let bytes-bar(parts, total-width: 100%, height: 9mm) = {
