@@ -4,10 +4,11 @@
 
 This chapter is a *specification*, not a description of built code. It was written from two real
 German deposit vouchers (_Pfandbons_): one from REWE, printed on 5 October 2026, which the app
-failed to recognise, and one from EDEKA, printed by a Tomra machine in 2023. The scanner accepts
-only EAN-13, and both carry a Code 128 barcode. Unlike the Albert Heijn sample (@fig-bon), both
-are redeemed or old and no longer held, so @fig-rewe and @fig-edeka reproduce their real values, barcodes
-included; only the EDEKA merchant's name, a person's surname, is left out.
+failed to recognise, and one from EDEKA, printed by a Tomra machine in 2023, from a photograph
+already published on the web. The scanner accepts only EAN-13, and both carry a Code 128 barcode.
+Unlike the Albert Heijn sample (@fig-bon), the REWE bon is redeemed and the EDEKA bon's digits are
+public already, so @fig-rewe and @fig-edeka reproduce their real values, barcodes included; only
+the EDEKA merchant's name, a person's surname, is left out.
 
 == Pfand in Germany
 
