@@ -159,9 +159,9 @@ Compared field by field:
   `ScanAccumulator` rule "the most-seen *valid EAN-13* wins" becomes "the most-seen valid payload
   *per format* wins", where a format is a symbology plus a payload shape: EAN-13 with its check
   digit; REWE, 24 digits whose last six parse as an amount; Tomra DE, 32 digits beginning `980`
-  with a valid GS1 check digit. A Code 128 payload of any other shape is kept as an unknown
-  format, saved only after the user confirms it, so a new chain degrades to manual entry of the
-  store and amount rather than to "not recognised".
+  with a valid GS1 check digit. A Code 128 payload of any other shape is saved as a generic
+  code without questions (@sec-generic), so a new chain degrades to a stored, displayable code
+  whose store and amount can be added later, rather than to "not recognised".
 - *Printed digits.* The REWE digits carry no check digit, so an OCR reading of them cannot be
   validated on its own. They are accepted as the payload only when no barcode was decoded *and*
   digits 13–18 equal the parsed `Nr.` *and* digits 19–24 equal the parsed total. The Tomra digits

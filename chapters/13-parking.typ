@@ -30,8 +30,10 @@ app already solves for vouchers.
 
 Three tags from a photograph of the older design were decoded with zxing-cpp. Each QR code
 contains *exactly the text printed under it*: one capital letter and five digits (`F12345` in @fig-tag), as
-plain text, with no URL, prefix or check character. Newer tags look similar. From
-this:
+plain text, with no URL, prefix or check character. A current tag, from the owner, carries
+*three letters and seven digits* (shape `ABC0012345`; the real one is not reproduced, since a
+tag in use is the key to a bike). Whether its QR also holds exactly the printed id is assumed
+from the older tags, not yet decoded. From this:
 
 #dtable(
   columns: (auto, 1fr),
@@ -88,11 +90,12 @@ day after day. For `parking` codes therefore:
 === Scanning
 
 `DataScannerViewController` and `VNDetectBarcodesRequest` gain `.qr`. A QR whose text matches
-`^[A-Z][0-9]{5}$` and whose surrounding text contains "Biesieklette" (or a printed id equal to
-the payload) is a parking tag; any other QR is kept as a generic code (@sec-share-templates),
-saved only after the user confirms it. The pattern is deliberately narrow and lives with the
-chain's rules, so a newer tag design with a different id shape fails into "generic", not into
-a misfiled voucher.
+one of the known id shapes, `^[A-Z][0-9]{5}$` (older tags) or `^[A-Z]{3}[0-9]{7}$` (current
+tags), and whose surrounding text contains "Biesieklette" (or a printed id equal to the payload)
+is a parking tag. Any other QR is saved as a generic code, without questions (@sec-generic). The
+patterns are deliberately narrow and live with the chain's rules, so a future tag design with a
+different id shape falls into "generic", not into a misfiled voucher, and can be changed into
+a parking tag with one tap.
 
 == Open questions
 
@@ -100,7 +103,8 @@ a misfiled voucher.
   physical tag, and whether the handover requires the tag itself back. If the physical tag must be
   returned, the app is a backup and a way to let another household member collect the bike, not a
   replacement.
-- *Newer tags.* The id shape of the current design (one letter, five digits on the older one).
+- *Current tags.* Whether the QR of a three-letter, seven-digit tag holds exactly the printed id,
+  and whether the letters mean something (a location, a series).
 - *Time limits and fees.* Whether a parking has a maximum stay or charges per day; if so,
   `expires_at` gets a value at check-in and the home screen warns before it.
 - *One bike, many members.* Whether a household member who did not park the bike may collect it

@@ -14,6 +14,8 @@
   produces a tag that detects any change to ciphertext or AAD.
 / App Group: A shared container that lets an app and its extensions (widget, share extension)
   read the same files.
+/ BCBP: IATA's Bar Coded Boarding Pass standard (Resolution 792); a fixed-width text in PDF417,
+  Aztec, QR or Data Matrix (@sec-boarding).
 / Biesieklette: A chain of bicycle parkings; a bike is collected by presenting the QR code it was
   checked in with (@sec-parking).
 / Blind index: A keyed hash (here HMAC-SHA256) stored next to encrypted data so that a server can test
@@ -39,6 +41,7 @@
 / LWW: Last write wins: the version with the later `updatedAt` (client clock, ms) is kept.
 / Pfandbon, Leergutbon: The German deposit voucher (REWE's and EDEKA's names); both samples carry
   a Code 128, of 24 and 32 digits (@sec-rewe).
+/ PNR: Passenger name record; here the six-character booking reference on a boarding pass.
 / PDOK Locatieserver: The Dutch government's free geocoder, used by the server for new stores.
 / Secure Enclave: Apple's hardware key store. Keys created there cannot be exported.
 / Soft delete: Setting `deleted_at` instead of removing the row, so the delete can sync.

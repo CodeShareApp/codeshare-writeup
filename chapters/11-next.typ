@@ -17,6 +17,7 @@
   [Domain split (`api.` + landing page)], [in progress], [App base URL switched in the main line; landing page and server side not merged or deployed. RP ID unchanged.],
   [German Pfandbons (REWE, EDEKA; Code 128)], [specified], [Two real bons; the REWE one not recognised by the scanner. Specification in @sec-rewe.],
   [Biesieklette parking tags (QR)], [specified], [New `parking` kind, location sealed; @sec-parking.],
+  [Generic codes, boarding pass import], [specified], [Any code saved without questions; BCBP parsing, PDF and `.pkpass` import; @sec-any-code.],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
 )
 
