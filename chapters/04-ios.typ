@@ -134,7 +134,7 @@ first build checked it before requesting access, so a fresh install proceeded di
 entry and never displayed the permission prompt. Access must be requested before availability is
 evaluated.]
 
-== EAN-13 rendering
+== EAN-13 rendering <sec-ean13>
 
 CoreImage can generate QR, Code 128, PDF417 and Aztec, but not EAN-13, which is the symbology
 used by the vouchers and the Bonuskaart. `EAN13.swift` implements it from the GS1 tables: 95 modules =

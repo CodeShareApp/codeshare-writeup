@@ -17,10 +17,13 @@
 / Blind index: A keyed hash (here HMAC-SHA256) stored next to encrypted data so that a server can test
   equality without learning the value.
 / Bonuskaart: Albert Heijn's loyalty card; an EAN-13 barcode pinned at the top of the Home screen.
+/ Code 128: A variable-length barcode (ISO/IEC 15417) with a mod-103 check symbol; subset C
+  packs two digits per symbol. Used by the REWE Pfandbon.
 / ECDH: Elliptic-curve Diffie–Hellman. Two key pairs derive the same shared secret; used to wrap K
   to a device's public key.
 / Emballagebon: The paper deposit voucher a return machine prints; redeemable only at that store.
 / EAN-13: The 13-digit retail barcode (GS1). 95 modules; the last digit is a check digit.
+/ Einweg, Mehrweg: German single-use (25 cents) and refillable (8 or 15 cents) deposit containers.
 / Filiaal: A store branch; its number keys stores and groups vouchers.
 / Glowie curve: This document's name for NIST P-256 (secp256r1), which CryptoKit calls `P256`; the
   only curve the Secure Enclave offers. "Glowie" is internet slang for intelligence-agency
@@ -32,6 +35,7 @@
 / K: The 32-byte household key, versioned. Never sent in the clear, never used directly.
 / Key holder: A device holding a wrap of the household's current key version.
 / LWW: Last write wins: the version with the later `updatedAt` (client clock, ms) is kept.
+/ Pfandbon: The German deposit voucher; REWE's carries a 24-digit Code 128 (@sec-rewe).
 / PDOK Locatieserver: The Dutch government's free geocoder, used by the server for new stores.
 / Secure Enclave: Apple's hardware key store. Keys created there cannot be exported.
 / Soft delete: Setting `deleted_at` instead of removing the row, so the delete can sync.

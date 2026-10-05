@@ -15,6 +15,7 @@
   [Widget, share in], [built, not merged], [Needs the App Group check in Xcode (@sec-signing).],
   [Share out (bon picture)], [built, not merged], [On the widget branch; needs no App Group.],
   [Domain split (`api.` + landing page)], [in progress], [App base URL switched in the main line; landing page and server side not merged or deployed. RP ID unchanged.],
+  [REWE Pfandbon (Code 128)], [specified], [One real bon, not recognised by the scanner; specification in @sec-rewe.],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
 )
 
@@ -29,8 +30,9 @@
   and a removal is safe only once it is followed by a rotation.
 - *Recovery code.* An optional printed or password-manager code that also wraps K, so that loss of
   every phone in the household does not entail loss of the codes.
-- *Jumbo.* Stores would need a chain column and a `(chain, number)` key; the app already has a
-  `Chain` enum and displays "Albert Heijn · city" throughout.
+- *Jumbo and REWE.* Stores would need a chain column and a `(chain, key)` key; the app already
+  has a `Chain` enum and displays "Albert Heijn · city" throughout. For REWE, whose Pfandbon is a
+  Code 128 without a printed store number, the specification is @sec-rewe.
 - *Paging* for `GET /api/sync` (a full resync returns everything in one response).
 - *PDOK street-level validation.* At present an address passes if PDOK finds it within the postcode; a
   stricter check would compare the house number.

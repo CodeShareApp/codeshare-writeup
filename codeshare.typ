@@ -57,4 +57,5 @@
 #include "chapters/09-review.typ"
 #include "chapters/10-incidents.typ"
 #include "chapters/11-next.typ"
+#include "chapters/12-rewe.typ"
 #include "chapters/appendix.typ"
