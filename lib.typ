@@ -305,7 +305,7 @@
 // ---------------------------------------------------------------- document template
 
 #let template(body) = {
-  set document(title: "Code Share: a study write-up", author: "Code Share project")
+  set document(title: "Code Share: a study write-up", author: "Karol Moroz")
   set page(
     width: 164mm,
     height: 236mm,

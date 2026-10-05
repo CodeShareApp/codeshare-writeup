@@ -1,5 +1,8 @@
 # Code Share: a study write-up
 
+By Karol Moroz. Code Share and this report were built with Claude Code, Anthropic's AI coding
+agent, directed by the author (chapter 9).
+
 A technical report on Code Share, a private iPhone app for a household to keep and share
 Albert Heijn deposit vouchers (emballagebonnen) and a Bonuskaart, with a Go backend that
 stores only end-to-end-encrypted blobs. It covers the constraints, the architecture, the

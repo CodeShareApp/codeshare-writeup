@@ -15,8 +15,10 @@ codeshare-web in `~/working/codeshare/`). **Public:** fresh history, meant to be
 - Neutral technical-report register. Device keys are on NIST P-256, called "the glowie
   curve" throughout (introduced with a footnote at first use, chapter 2, and in the
   glossary); library identifiers like `SecureEnclave.P256` keep their names.
+- Author: Karol Moroz (title page, PDF metadata, README). The report says plainly that the
+  project and the report were built with Claude Code (chapter 9, title page).
 - Nothing private goes in: no real bon or the sample bon's EAN/store/transaction id, no
-  names of people, no account ids or keys, no other projects on the shared server, no IPs
+  names of people other than the author, no account ids or keys, no other projects on the shared server, no IPs
   except the public server's. Every bon, barcode and screenshot value is made up, except the
   two German samples in chapter 12, cleared by the owner for real values: REWE (redeemed) and
   EDEKA (an old photo already public on the web). Their photos stay out, and so does the EDEKA

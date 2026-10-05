@@ -5,7 +5,10 @@
 == How the work was organised
 
 The entire project, from a plan drafted in a claude.ai chat to a deployed backend and an
-end-to-end-encrypted app, was built by one main session orchestrating background agents. The
+end-to-end-encrypted app, was built with Claude Code, Anthropic's AI coding agent: one main
+session orchestrating background agents, directed and reviewed by the author, who decided the
+requirements and the trade-offs and tested on real phones and at the till. This report was
+produced the same way. The
 author timestamps of all commits fall on 2 October 2026. The work was organised as follows:
 
 - *Separate jj workspaces per stream*: `workspaces/ios`, `workspaces/backend`, `workspaces/widget`

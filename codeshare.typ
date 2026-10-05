@@ -25,6 +25,10 @@
   #grid(
     columns: (1fr, 1fr),
     row-gutter: 0.7em,
+    text(size: 8.5pt, fill: c.muted)[Author],
+    align(right, text(size: 8.5pt, fill: c.text)[Karol Moroz]),
+    text(size: 8.5pt, fill: c.muted)[Built with],
+    align(right, text(size: 8.5pt, fill: c.text)[Claude Code (Anthropic), directed by the author]),
     text(size: 8.5pt, fill: c.muted)[State described],
     align(right, text(size: 8.5pt, fill: c.text)[3 October 2026]),
     text(size: 8.5pt, fill: c.muted)[Repositories],
