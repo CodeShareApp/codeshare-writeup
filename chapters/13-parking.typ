@@ -32,8 +32,8 @@ Three tags from a photograph of the older design were decoded with zxing-cpp. Ea
 contains *exactly the text printed under it*: one capital letter and five digits (`F12345` in @fig-tag), as
 plain text, with no URL, prefix or check character. A current tag, from the owner, carries
 *three letters and seven digits*: `RGF0057506`, received on 3 October 2026 and since used to
-collect the bike, so reproducing it unlocks nothing. Whether its QR also holds exactly the printed
-id is assumed from the older tags, not yet decoded. From this:
+collect the bike, so reproducing it unlocks nothing. Its QR holds exactly `RGF0057506`, as
+printed, so the rule holds for both designs. From this:
 
 #dtable(
   columns: (auto, 1fr),
@@ -79,7 +79,7 @@ code* at 08:12 is visible to the server; that it parked a bike, and where, is no
   aloud or type.
 - *Collect.* Showing the code offers "Collected", with undo, as "used" does for vouchers.
 - *Share.* The share template (@sec-share-templates) for a tag is a tag look-alike as in
-  @fig-tag, with "Kopie · CodeShare" and no logo, round-tripping payload, kind and parking name.
+  @fig-tag, with "Kopie · Code Share" and no logo, round-tripping payload, kind and parking name.
 
 === Scanning
 
@@ -98,8 +98,7 @@ Whether another household member may collect the bike with it remains open (belo
 
 == Open questions
 
-- *Current tags.* Whether the QR of a three-letter, seven-digit tag holds exactly the printed id,
-  and whether the letters mean something (a location, a series).
+- *Current tags.* Whether the three letters mean something (a location, a series).
 - *Time limits and fees.* Whether a parking has a maximum stay or charges per day; if so,
   `expires_at` gets a value at check-in and the home screen warns before it.
 - *One bike, many members.* Whether a household member who did not park the bike may collect it

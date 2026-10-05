@@ -5,7 +5,7 @@
 == The shared host
 
 The API runs on the FreeBSD server at `64.176.73.190`, next to the author's other
-projects. None of CodeShare's server configuration resides in the CodeShare repository: the
+projects. None of Code Share's server configuration resides in the Code Share repositories: the
 `codeshare` project entry in `shared-infrastructure` (`group_vars/all/vars.yml`) declares uid 2005,
 port 8000, the domains, the backup bucket and the environment, and Ansible turns that into a user, a
 database (peer authentication over the Unix socket), directories, an env file, an rc.d service and a

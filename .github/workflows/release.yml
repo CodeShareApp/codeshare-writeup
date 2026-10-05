@@ -76,7 +76,7 @@ jobs:
           gh release create "$TAG" "$RUNNER_TEMP/out/$dark" "$RUNNER_TEMP/out/$light" \
             --target "$GITHUB_SHA" \
             --title "Write-up, $TAG" \
-            --notes "The CodeShare study write-up, built from ${GITHUB_SHA::7} with Typst ${TYPST_VERSION#v}.
+            --notes "The Code Share study write-up, built from ${GITHUB_SHA::7} with Typst ${TYPST_VERSION#v}.
 
           - \`$dark\`: dark theme
           - \`$light\`: light theme (day mode)

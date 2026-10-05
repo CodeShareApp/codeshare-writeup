@@ -1,4 +1,4 @@
-// Shared styles and helpers for the CodeShare write-up (iPad page).
+// Shared styles and helpers for the Code Share write-up (iPad page).
 // Two themes: dark (default) and light, picked with `--input theme=light` (see build.sh).
 
 #let theme = sys.inputs.at("theme", default: "dark")
@@ -305,7 +305,7 @@
 // ---------------------------------------------------------------- document template
 
 #let template(body) = {
-  set document(title: "CodeShare: a study write-up", author: "CodeShare project")
+  set document(title: "Code Share: a study write-up", author: "Code Share project")
   set page(
     width: 164mm,
     height: 236mm,
@@ -326,7 +326,7 @@
       set text(size: 7.8pt, fill: c.muted)
       grid(
         columns: (1fr, auto),
-        text(fill: c.accent, weight: "medium", tracking: 0.04em)[CODESHARE],
+        text(fill: c.accent, weight: "medium", tracking: 0.04em)[CODE SHARE],
         title,
       )
       v(-0.55em)

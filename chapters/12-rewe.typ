@@ -243,7 +243,7 @@ The rules for every template:
   rules of @sec-ean13, never in a substitute such as QR (@sec-qr-test), whatever the till experiment
   shows: the picture is for importing into another phone, not for the till.
 - *Marked as a copy.* The paper is the bearer instrument (@sec-rewe), so the picture carries a
-  footer line, "Kopie · CodeShare" ("Kopie" is the word in Dutch and German alike), and no logo, so that it cannot pass for the original paper. The parser ignores the line.
+  footer line, "Kopie · Code Share" ("Kopie" is the word in Dutch and German alike), and no logo, so that it cannot pass for the original paper. The parser ignores the line.
 - *No match, generic.* A code of an unknown format, or one that is not a deposit voucher at all,
   is shared with the generic template, which still round-trips payload and label.
 

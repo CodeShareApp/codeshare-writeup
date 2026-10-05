@@ -2,6 +2,11 @@
 
 = The iOS app
 
+The product is called *Code Share*, two words, in everything a user reads (home screen name,
+share footer, this report). Identifiers keep the single word: the `ios/CodeShare/` sources, the
+`CodeShare` scheme and test target, the App Group `group.dev.moroz.CodeShare` and the
+`codeshare/v1/…` key-derivation labels, which cannot change without a migration (@sec-key-labels).
+
 The app comprises about 6,800 lines of Swift in `ios/CodeShare/` (`Models`, `Services`, `Views`,
 `Views/Components`, `Resources`) and roughly 180 XCTest cases. The Xcode project is a hand-written
 `pbxproj` with file-system synchronised groups, so a new file in `ios/CodeShare/` requires no

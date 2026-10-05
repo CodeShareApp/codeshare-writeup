@@ -1,6 +1,7 @@
 # codeshare-writeup
 
-Typst technical report on CodeShare (the sibling repos codeshare-ios, codeshare-api and
+Typst technical report on Code Share (two words in prose; identifiers such as
+`ios/CodeShare/` and `codeshare/v1/…` keep theirs; the sibling repos codeshare-ios, codeshare-api and
 codeshare-web in `~/working/codeshare/`). **Public:** fresh history, meant to be published.
 
 - **Always build with `mise run build`.** It builds both themes, dark (default) and light

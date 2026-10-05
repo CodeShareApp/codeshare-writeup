@@ -19,6 +19,7 @@
   [Biesieklette parking tags (QR)], [specified], [New `parking` kind, location sealed; @sec-parking.],
   [Generic codes, boarding pass import], [specified], [Any code saved without questions; BCBP parsing, PDF and `.pkpass` import; @sec-any-code.],
   [Sealed stores and code metadata], [specified], [Store rows per household, sealed; plaintext kind, status and timestamps dropped; ships with the wipe (@sec-sealed-stores).],
+  [Name "Code Share" (two words)], [decided], [Display name and share footer to change; identifiers stay `CodeShare`.],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
 )
 

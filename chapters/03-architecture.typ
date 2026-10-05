@@ -2,7 +2,7 @@
 
 = Architecture overview
 
-CodeShare is *local-first*. Each phone holds a complete SQLite database and functions without any
+Code Share is *local-first*. Each phone holds a complete SQLite database and functions without any
 network connection; the server acts as a relay and a backup that stores, orders and returns
 encrypted blobs but cannot read them. @fig-arch shows the components.
 

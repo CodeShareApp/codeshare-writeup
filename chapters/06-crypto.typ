@@ -44,7 +44,7 @@ The additional cost of E2EE falls almost entirely on the phones and on one in-pe
 (scanning a QR code). For members of one household, who meet in person routinely, this procedure
 imposes no practical cost.
 
-== The key hierarchy
+== The key hierarchy <sec-key-labels>
 
 #fig(
   canvas(60mm, {

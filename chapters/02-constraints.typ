@@ -2,7 +2,7 @@
 
 = Constraints and stack
 
-Most design decisions in CodeShare follow from a small number of constraints. Each constraint
+Most design decisions in Code Share follow from a small number of constraints. Each constraint
 excludes an otherwise obvious solution, and they are therefore stated here before the design.
 
 == A free Apple developer account
@@ -13,7 +13,7 @@ sideload builds onto the owner's own phones, subject to the following limits:
 
 #dtable(
   columns: (auto, 1fr, 1.2fr),
-  header: ("Missing", "Would have been used for", "What CodeShare does instead"),
+  header: ("Missing", "Would have been used for", "What Code Share does instead"),
   [Push (APNs)], [Notifying the other members' phones that a code was added or used], [Sync on foreground, 2 s after an edit, on pull-to-refresh],
   [Sign in with Apple], [Accounts], [Passkeys on a server-hosted page in `ASWebAuthenticationSession` (the holy-shit approach)],
   [Associated Domains], [Native passkey APIs bound to the domain], [Same page-based flow, custom URL scheme callback],
@@ -79,7 +79,7 @@ one can be ported to the other. The iOS app adopts holy-shit-ios's `AuthService`
 flow.
 
 The one intentional departure is the backend *layering*. In holy-shit-api, handlers call sqlc
-directly. CodeShare places a service layer (business rules, transactions) and a repository layer
+directly. Code Share places a service layer (business rules, transactions) and a repository layer
 (multi-table queries) between the generated handlers and the database. This decision was taken by
 the owner before any code was written, on the grounds that the household, key-wrap and sync rules
 are too intricate to reside in handlers.

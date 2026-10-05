@@ -1,4 +1,4 @@
-// CodeShare — a study write-up. Build with `mise run build` (see README.md).
+// Code Share — a study write-up. Build with `mise run build` (see README.md).
 
 #import "lib.typ": *
 #show: template
@@ -8,7 +8,7 @@
   #align(center)[
     #box(radius: 22pt, clip: true, image("/images/app-icon.png", width: 46mm))
     #v(12mm)
-    #text(size: 34pt, weight: "bold", fill: c.text)[CodeShare]
+    #text(size: 34pt, weight: "bold", fill: c.text)[Code Share]
     #v(2mm)
     #text(size: 13pt, fill: c.accent)[A study write-up]
     #v(8mm)
