@@ -15,6 +15,11 @@ most plastic bottles) carries a flat 25 cents. _Mehrweg_ (refillable: glass and 
 plastic) carries 8 or 15 cents. A reverse vending machine at a REWE supermarket prints one voucher
 for a whole return, grouped by kind, which the till accepts as store credit.
 
+The specification takes the same redemption rule as for Albert Heijn: *a Pfandbon is redeemable
+only at the market that printed it.* This is a design assumption, not a confirmed fact; if REWE
+turns out to accept bons chain-wide, the rule only widens (any REWE becomes "here" for the at-store
+card), and nothing stored has to change.
+
 == Anatomy of a Pfandbon
 
 #let bonline(body, al: left, size: 7.6pt, weight: "regular") = align(al, text(font: mono-font, size: size, fill: c.ink, weight: weight, tracking: 0.06em, body))
@@ -77,6 +82,7 @@ Compared field by field with the emballagebon:
   header: ("Field", "Albert Heijn emballagebon", "REWE Pfandbon"),
   [Barcode], [EAN-13, 13 digits, last is a check digit.], [Code 128 (subset C), 24 digits, no check digit in the digits; the symbol's own mod-103 check covers the scan.],
   [Store key], [Filiaal number, printed.], [None printed. Address only (and perhaps barcode digits 1–12).],
+  [Redeemable at], [The issuing store only.], [The issuing market only (assumed).],
   [Address], [Street, then `NNNN AA` postcode and city.], [Street (house-number ranges such as `12-14`), then `NNNNN` postcode and city.],
   [Amount], [`€ 0.55` line; not in the barcode.], [`Total:` followed by `x.xx EUR` on the next line; also barcode digits 19–24.],
   [Line items], [`1x Blik 0.15`], [`<n> Flasc.. à <unit> <sum>` under `Mehrweg` / `Einweg` headings.],
@@ -134,7 +140,9 @@ The local and server schemas already carry a `symbology` column, and the sealed 
 includes it (@sec-sealed-meta), so codes need no migration: a Pfandbon is a code with
 `symbology = "code128"`. Stores do:
 
-- *Store key.* Stores are keyed by filiaal number, and a Pfandbon prints none. The key becomes
+- *Store key.* Because a Pfandbon is redeemable only where it was printed, the store is what a
+  voucher is grouped and redeemed by, as the filiaal number is for Albert Heijn. Stores are keyed
+  by filiaal number, and a Pfandbon prints none. The key becomes
   `(chain, key)`, as already anticipated for Jumbo (@sec-rewe-open). Until a second bon settles
   whether barcode digits 1–12 identify the market, a REWE store's key is derived from the
   normalised address (postcode, street, house number). The server's immutable-address rule
@@ -154,8 +162,6 @@ includes it (@sec-sealed-meta), so codes need no migration: a Pfandbon is a code
 - *Digits 1–12.* Do they identify the market, the machine, or the date? One sample cannot say.
   A second bon from the same machine, one from another machine in the same market, and one from
   another market answer it, and decide the store key.
-- *Redemption rule.* The app assumes, as for Albert Heijn, that a Pfandbon is redeemable only at
-  the issuing market. This is to be confirmed at a till, as the screen-scan was for Albert Heijn.
 - *Screen scanning.* Whether REWE tills read a Code 128 from a phone screen has not been tested.
   Code 128 at 24 digits is wider than EAN-13 (167 modules against 95, before quiet zones), so the
   code screen should prefer landscape for it.
