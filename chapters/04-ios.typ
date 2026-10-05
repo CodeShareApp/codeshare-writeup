@@ -252,7 +252,8 @@ static func screen(hasAccount: Bool, localModeChosen: Bool,
 }
 ```
 
-Sign-in on a free team follows the holy-shit approach: `ASWebAuthenticationSession` opens the server's
+Sign-in on a free team follows the holy-shit approach (to be replaced by native passkeys on the
+paid team, @sec-paid-team): `ASWebAuthenticationSession` opens the server's
 `/auth` page (WebAuthn runs in the browser, under `codeshare.shop`), which redirects to
 `codeshare://auth?code=…`; the app exchanges the one-time code at `POST /api/auth/token` for a
 bearer token kept in the Keychain. The session token never appears in a URL. Signing out returns to

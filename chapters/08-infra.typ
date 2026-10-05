@@ -77,6 +77,29 @@ open Xcode instance rewrote it, and the string catalogs, without the agents' kno
 changes were reverted). Second, development builds are installed only on the developer's own phone;
 other household members' phones receive a build only once it is known to be good.
 
+== Moving to the paid team <sec-paid-team>
+
+A paid membership was bought on 4 October 2026. What it opens, and what the move costs:
+
+#dtable(
+  columns: (auto, 1fr),
+  header: ("Capability", "Use"),
+  [Associated Domains], [Native passkeys: `ASAuthorizationPlatformPublicKeyCredentialProvider` with the entitlement `webcredentials:codeshare.shop` and an `apple-app-site-association` file on the server naming the app. The relying party ID stays `codeshare.shop`, so passkeys created through the page-based flow remain valid; the server needs JSON begin/finish endpoints beside the `/auth` page, which can stay as a fallback.],
+  [App Groups], [Provisioned by the team: the widget and share-extension branch (@sec-widget) is no longer blocked on the free-team question.],
+  [TestFlight], [Builds for the other members' phones, valid for 90 days instead of 7. The tail of old versions grows from a week to three months, which the server's compatibility rules must now allow for (@sec-wipe).],
+  [Push (APNs)], [Possible: a silent push to the other members when a code changes, replacing sync-on-foreground as the main trigger.],
+)
+
+*The team identifier changes*, and it prefixes the app's Keychain access group. An app re-signed
+by the paid team most likely cannot read the Keychain items written under the Personal Team:
+the bearer token, the household key K and the Secure Enclave device key (whose reference is a
+Keychain item). The local SQLite database survives only if the bundle identifier is kept, and a
+bundle identifier registered by the Personal Team must first be released to the new team. In
+effect every phone becomes a new device. The move is therefore sequenced with the wipe below:
+both phones on a new build signed by the paid team, a fresh household, codes re-entered from the
+local export or paper. The App Group `group.dev.moroz.CodeShare` is registered under the paid
+team at the same time. This should be confirmed on one phone before it is relied on.
+
 == Sequencing the glowie-curve switch <sec-wipe>
 
 Moving device keys from Curve25519 to Secure Enclave glowie-curve keys changed the public-key size

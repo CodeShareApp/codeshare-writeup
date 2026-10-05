@@ -22,6 +22,10 @@ sideload builds onto the owner's own phones, subject to the following limits:
   [App Groups (unverified)], [Database shared with widget and share extension], [Entitlement added; whether a free team can provision it remains to be checked in Xcode],
 )
 
+#note(title: "Update, 5 October 2026")[The paid programme has since been purchased. The switch
+to the paid team is planned in @sec-paid-team: it opens Associated Domains (native passkeys), App
+Groups, TestFlight and push, and it changes the team identifier, which scopes the Keychain.]
+
 The seven-day expiry is more consequential than it appears. Any build on a phone is at most one
 week old, so there is no long tail of old app versions requiring compatibility. A short tail does
 exist, however, and @sec-wipe describes a case in which an old build on one phone constrained a
