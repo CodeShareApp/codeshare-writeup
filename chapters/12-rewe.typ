@@ -212,6 +212,40 @@ test renders both sample payloads above and decodes them with Vision, which must
 same 24 and 32 digits. If the generator's output fails that test, a subset C encoder is about forty lines (the
 one in `lib.typ` is twenty) and keeps the app independent of the generator's choices.
 
+=== Sharing <sec-share-templates>
+
+The share button (`BonImageRenderer`, @sec-widget) draws every voucher as an Albert Heijn
+emballagebon. A REWE or EDEKA voucher shared that way would look wrong to the person receiving
+it and, worse, would not import as what it is: the parser would take it for a Dutch bon. Every
+supported format therefore gets its own template, chosen from the code's format and chain:
+
+#dtable(
+  columns: (auto, 1fr, 1fr),
+  header: ("Template", "Layout (as in)", "Barcode"),
+  [Tomra NL (Albert Heijn)], [@fig-bon: header, filiaal, address, `Emballagebon`, amount, Tomra footer.], [EAN-13],
+  [REWE], [@fig-rewe: header, address, `Nr.`, date and time lines, `Total:` and `EUR`.], [Code 128, 24 digits],
+  [Tomra DE (EDEKA)], [@fig-edeka: header, address, `LEERGUTBON`, `Bon`, inverted amount, Tomra footer.], [Code 128, 32 digits],
+  [Generic], [Label, store if any, amount if any; no chain look.], [As stored],
+)
+
+The rules for every template:
+
+- *Only stored facts.* A template draws only what the app stores: payload, chain, store address,
+  amount, issue time, and the fields the payload itself carries (REWE `Nr.`, EDEKA `Bon`). Lines
+  the app does not keep, such as REWE's line items, the Tomra transaction line or the machine
+  number, are omitted rather than invented. The parser already treats them as optional.
+- *Round trip per template.* The existing test (render a voucher, read it back through
+  `PhotoCodeReader` and `BonParser`, compare payload, store, amount and issue time) runs once per
+  template, and additionally compares the detected chain and format. A template that does not
+  round-trip is a failing test, not a cosmetic defect.
+- *Barcode as printed.* The barcode is drawn in the voucher's own symbology, with the rendering
+  rules of @sec-ean13, never in a substitute such as QR (@sec-qr-test), whatever the till experiment
+  shows: the picture is for importing into another phone, not for the till.
+- *Marked as a copy.* The paper is the bearer instrument (@sec-rewe), so the picture carries a
+  footer line, "Kopie · CodeShare" ("Kopie" is the word in Dutch and German alike), and no logo, so that it cannot pass for the original paper. The parser ignores the line.
+- *No match, generic.* A code of an unknown format, or one that is not a deposit voucher at all,
+  is shared with the generic template, which still round-trips payload and label.
+
 === Data model and sync
 
 The local and server schemas already carry a `symbology` column, and the sealed payload already

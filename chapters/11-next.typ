@@ -13,7 +13,7 @@
   [Backend (Curve25519 era)], [deployed], [`codeshare.shop`, telemetry on, backups configured.],
   [Backend (glowie-curve keys)], [reviewed, not deployed], [Awaits confirmation of the new build on the phone, then wipe + deploy (@sec-wipe).],
   [Widget, share in], [built, not merged], [Needs the App Group check in Xcode (@sec-signing).],
-  [Share out (bon picture)], [built, not merged], [On the widget branch; needs no App Group.],
+  [Share out (bon picture)], [built, not merged], [On the widget branch; needs no App Group. Albert Heijn template only; per-chain templates specified (@sec-share-templates).],
   [Domain split (`api.` + landing page)], [in progress], [App base URL switched in the main line; landing page and server side not merged or deployed. RP ID unchanged.],
   [German Pfandbons (REWE, EDEKA; Code 128)], [specified], [Two real bons; the REWE one not recognised by the scanner. Specification in @sec-rewe.],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
