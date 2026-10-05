@@ -41,8 +41,10 @@
 - *PDOK street-level validation.* At present an address passes if PDOK finds it within the postcode; a
   stricter check would compare the house number. Moot once stores are sealed (@sec-sealed-stores)
   and the server validates nothing.
-- *Verification of the amount rule* against a second bon (whether the amount is indeed absent from
-  the barcode).
+- *Verification of the amount rule* (done): a second Albert Heijn bon, of 2 October 2026, also
+  carries no amount in its barcode. Its EAN-13 begins with `980`, GS1's refund-receipt prefix, as
+  the EDEKA Tomra bon does (@sec-rewe); the fictitious sample of @fig-bon begins with `2` and
+  should follow suit when the figure is next redrawn.
 - *Expiry rules* per household, and the Apple Watch app (whether an Albert Heijn scanner reads an
   EAN-13 from a watch face remains to be tested; @sec-qr-test may make the question moot).
 - *QR codes at the till* (@sec-qr-test).

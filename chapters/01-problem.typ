@@ -79,7 +79,7 @@ The information the bon provides, and the information it lacks, is as follows:
   header: ("Field", "Notes"),
   [Filiaal number], [The key for everything store-related. Vouchers are grouped and redeemed by it.],
   [Street, postcode, city], [Used to geocode the store (for "nearest store first"). Dutch postcode: four digits, first not 0, two letters.],
-  [Amount], [*Not* encoded in the barcode, as far as one sample shows. Read from the `€ x.xx` line, falling back to the line items' sum.],
+  [Amount], [*Not* encoded in the barcode (two samples). Read from the `€ x.xx` line, falling back to the line items' sum.],
   [EAN-13], [The voucher itself. The app regenerates the bars from the digits rather than storing a photo.],
   [Timestamp], [Local Dutch time, Dutch month abbreviations (`MRT`, `MEI`, `OKT`). Stored as `issued_at`.],
   [Expiry], [None printed. `expires_at` is optional, for a later household rule.],

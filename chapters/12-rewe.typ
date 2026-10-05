@@ -127,7 +127,8 @@ different structure:
 )
 
 Two observations matter more than the digits. First, the amount is absent from the barcode, as on
-the Albert Heijn bon and unlike the REWE one. Second, the lower half of the bon is *the same Tomra
+the Albert Heijn bons and unlike the REWE one; a second Albert Heijn bon begins with the same `980`
+prefix, so the prefix belongs to Tomra's format rather than to one chain or country. Second, the lower half of the bon is *the same Tomra
 template* as the emballagebon (@fig-bon): a `Tomra 9` line, a transaction line of the form
 `NNNNNN-NNNNNNNN-NNNNN-NN`, and a timestamp `HH:mm:ss dd-MMM-yyyy` with upper-case month
 abbreviations. The layout of a voucher follows the *machine* that prints it as much as the chain
