@@ -32,8 +32,10 @@ Three tags from a photograph of the older design were decoded with zxing-cpp. Ea
 contains *exactly the text printed under it*: one capital letter and five digits (`F12345` in @fig-tag), as
 plain text, with no URL, prefix or check character. A current tag, from the owner, carries
 *three letters and seven digits*: `RGF0057506`, received on 3 October 2026 and since used to
-collect the bike, so reproducing it unlocks nothing. Its QR holds exactly `RGF0057506`, as
-printed, so the rule holds for both designs. From this:
+collect the bike, so reproducing it unlocks nothing. Decoded from the owner's photograph with
+zxing-cpp, its QR holds exactly `RGF0057506` (plain QR, error-correction level M), as printed, so
+the rule holds for both designs. The current tag is green and carries the municipality's brand,
+"Den Haag Fietst!", and a bicycle; *the name Biesieklette does not appear on it*. From this:
 
 #dtable(
   columns: (auto, 1fr),
@@ -85,8 +87,9 @@ code* at 08:12 is visible to the server; that it parked a bike, and where, is no
 
 `DataScannerViewController` and `VNDetectBarcodesRequest` gain `.qr`. A QR whose text matches
 one of the known id shapes, `^[A-Z][0-9]{5}$` (older tags) or `^[A-Z]{3}[0-9]{7}$` (current
-tags), and whose surrounding text contains "Biesieklette" (or a printed id equal to the payload)
-is a parking tag. Any other QR is saved as a generic code, without questions (@sec-generic). The
+tags), and whose surrounding text contains "Biesieklette" or "Den Haag Fietst", or a printed id
+equal to the payload, is a parking tag. The id shape and the printed id are the reliable signals:
+the brand on the tag belongs to whoever commissioned the parking, not to the operator. Any other QR is saved as a generic code, without questions (@sec-generic). The
 patterns are deliberately narrow and live with the chain's rules, so a future tag design with a
 different id shape falls into "generic", not into a misfiled voucher, and can be changed into
 a parking tag with one tap.
