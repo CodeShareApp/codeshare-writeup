@@ -65,4 +65,5 @@
 #include "chapters/13-parking.typ"
 #include "chapters/14-any-code.typ"
 #include "chapters/15-sealed-stores.typ"
+#include "chapters/16-wallet.typ"
 #include "chapters/appendix.typ"

@@ -21,6 +21,8 @@
 / Blind index: A keyed hash (here HMAC-SHA256) stored next to encrypted data so that a server can test
   equality without learning the value.
 / Bonuskaart: Albert Heijn's loyalty card; an EAN-13 barcode pinned at the top of the Home screen.
+/ Code 39: An older variable-length barcode of digits, capitals and a few symbols; on the
+  library card (@sec-wallet).
 / Code 128: A variable-length barcode (ISO/IEC 15417) with a mod-103 check symbol; subset C
   packs two digits per symbol. Used by the REWE Pfandbon.
 / ECDH: Elliptic-curve Diffie–Hellman. Two key pairs derive the same shared secret; used to wrap K
@@ -42,6 +44,7 @@
 / Pfandbon, Leergutbon: The German deposit voucher (REWE's and EDEKA's names); both samples carry
   a Code 128, of 24 and 32 digits (@sec-rewe).
 / PNR: Passenger name record; here the six-character booking reference on a boarding pass.
+/ Pass Type ID: Apple's identifier under which Wallet passes are signed; needs the paid programme.
 / PDOK Locatieserver: The Dutch government's free geocoder, used by the server for new stores.
 / Secure Enclave: Apple's hardware key store. Keys created there cannot be exported.
 / Soft delete: Setting `deleted_at` instead of removing the row, so the delete can sync.

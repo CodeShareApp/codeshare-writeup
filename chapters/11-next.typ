@@ -21,6 +21,7 @@
   [Generic codes, boarding pass import], [specified], [Any code saved without questions; BCBP parsing, PDF and `.pkpass` import; @sec-any-code.],
   [Sealed stores and code metadata], [specified], [Store rows per household, sealed; plaintext kind, status and timestamps dropped; ships with the wipe (@sec-sealed-stores).],
   [Name "Code Share" (two words)], [decided], [Display name and share footer to change; identifiers stay `CodeShare`.],
+  [Code wallet: cards, Apple Wallet passes], [specified], [Kind `card` (Bonuskaart, library card); passes signed from the manifest only; @sec-wallet.],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
 )
 
@@ -94,6 +95,10 @@ meaning the scanner decoded it and the POS declined, which points at causes 2 or
 anything. The outcome is recorded per chain and per till type. The code screen then
 picks the symbology from that record, defaulting to the one printed on the paper. Until the test
 is done, nothing changes in the app: QR display is a candidate feature, not a plan.
+
+Each QR step is repeated with the same digits as Code 128: Apple Wallet can show QR and Code 128
+but not EAN-13, so the outcome also decides whether Albert Heijn codes can become Wallet passes
+(@sec-wallet).
 
 #note[A refusal at step 3 after a pass at step 2 is the interesting case. It would mean the POS
 distinguishes vouchers by symbology, not only by digits, and that a voucher must be shown as
