@@ -31,9 +31,9 @@ app already solves for vouchers.
 Three tags from a photograph of the older design were decoded with zxing-cpp. Each QR code
 contains *exactly the text printed under it*: one capital letter and five digits (`F12345` in @fig-tag), as
 plain text, with no URL, prefix or check character. A current tag, from the owner, carries
-*three letters and seven digits* (shape `ABC0012345`; the real one is not reproduced, since a
-tag in use is the key to a bike). Whether its QR also holds exactly the printed id is assumed
-from the older tags, not yet decoded. From this:
+*three letters and seven digits*: `RGF0057506`, received on 3 October 2026 and since used to
+collect the bike, so reproducing it unlocks nothing. Whether its QR also holds exactly the printed
+id is assumed from the older tags, not yet decoded. From this:
 
 #dtable(
   columns: (auto, 1fr),
@@ -97,12 +97,13 @@ patterns are deliberately narrow and live with the chain's rules, so a future ta
 different id shape falls into "generic", not into a misfiled voucher, and can be changed into
 a parking tag with one tap.
 
+#note(title: "Tested")[*The code is accepted from a phone screen.* The owner collected a bike
+with the current tag `RGF0057506` shown on a phone screen instead of the physical tag. For
+Biesieklette, the app can therefore replace the tag at the counter, not merely back it up.
+Whether another household member may collect the bike with it remains open (below).]
+
 == Open questions
 
-- *Screen at the counter.* Whether attendants accept the code from a phone screen instead of the
-  physical tag, and whether the handover requires the tag itself back. If the physical tag must be
-  returned, the app is a backup and a way to let another household member collect the bike, not a
-  replacement.
 - *Current tags.* Whether the QR of a three-letter, seven-digit tag holds exactly the printed id,
   and whether the letters mean something (a location, a series).
 - *Time limits and fees.* Whether a parking has a maximum stay or charges per day; if so,

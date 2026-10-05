@@ -7,7 +7,8 @@ iOS app, the backend, the cryptography (household keys, Secure Enclave device ke
 wraps, rotation), sync, deployment, and what code review caught along the way.
 
 Written in [Typst](https://typst.app/). The values on every bon, barcode and screenshot in
-it are made up, except the two German samples in chapter 12, one redeemed, one already public.
+it are made up, except the two German samples in chapter 12 (one redeemed, one already public) and
+a used parking tag in chapter 13.
 
 ## Building
 

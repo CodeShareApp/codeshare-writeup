@@ -18,6 +18,8 @@ codeshare-web in `~/working/codeshare/`). **Public:** fresh history, meant to be
   names of people, no account ids or keys, no other projects on the shared server, no IPs
   except the public server's. Every bon, barcode and screenshot value is made up, except the
   two German samples in chapter 12, cleared by the owner for real values: REWE (redeemed) and
-  EDEKA (an old photo already public on the web). Their photos stay out, and so does the EDEKA merchant's name (a person's).
+  EDEKA (an old photo already public on the web). Their photos stay out, and so does the EDEKA
+  merchant's name (a person's). Likewise the owner's used Biesieklette tag `RGF0057506` in
+  chapter 13 (the bike was collected with it).
 - Images live in `images/`, referenced root-relative (`/images/...`); compile from the
   repository root.
