@@ -63,18 +63,12 @@ differences are in meaning, not in shape:
 
 === Privacy: the location stays sealed
 
-For vouchers, the store is a plaintext column, and stores are global rows on the server, because
-"which store does this bon belong to" is a fact printed on public paper, and the server needs it
-for nothing secret. A parking tag is different: plaintext location plus plaintext timestamps
-would tell the server where a household's bikes stand and when they were left and collected,
-day after day. For `parking` codes therefore:
-
-- the location (name and coordinates) lives *only in the sealed content* (@sec-sealed-meta); the
-  plaintext store column is empty, and no global store row is created, so the PDOK rule and the
-  squatting limits of @sec-rewe do not apply;
-- the plaintext timestamps the server needs for last-write-wins remain, as for every code. That
-  the household *changed a code* at 08:12 is visible to the server; that it parked a bike, and
-  where, is not.
+Plaintext location plus plaintext timestamps would tell the server where a household's bikes
+stand and when they were left and collected, day after day. The parking is therefore a sealed
+household store like any other (@sec-sealed-stores): its name and coordinates live only in sealed
+content, and the code's kind, status and times are sealed too. The plaintext `client_updated_at`
+the server needs for last-write-wins remains, as for every code: that the household *changed a
+code* at 08:12 is visible to the server; that it parked a bike, and where, is not.
 
 === Display and sharing
 

@@ -261,14 +261,12 @@ is shown as such rather than hidden, since a market may still accept it. Stores 
   by filiaal number, and a Pfandbon prints none. The key becomes
   `(chain, key)`, as already anticipated for Jumbo. Until further bons settle whether
   unexplained barcode digits identify the market, a German store's key is derived from the
-  normalised address (postcode, street, house number). The server's immutable-address rule
-  (first bon prevails) then holds trivially, since the address *is* the key.
-- *Geocoding.* The server accepts a new store only if PDOK geocodes it *inside the Netherlands*.
-  A Berlin store would be refused with 400. German stores need a second geocoder behind the same
-  rules (restricted to the postcode, coordinates validated inside a bounding box, an unreachable
-  geocoder saves the store unverified). OpenStreetMap's Nominatim with `countrycodes=de` and
-  `postalcode` fits the volume (its usage policy allows one request per second); the squatting
-  limit of ten new stores per user per day applies unchanged.
+  normalised address (postcode, street, house number). The immutable-address rule (first bon
+  prevails) then holds trivially, since the address *is* the key.
+- *Geocoding.* With global store rows, the server would refuse a Berlin store (PDOK must find it
+  inside the Netherlands) and would need a second geocoder for Germany. With sealed household
+  stores (@sec-sealed-stores) the server geocodes nothing: the phone uses MapKit, as it already
+  does, and German stores need no server change at all.
 - *Display.* "Albert Heijn · city" becomes "chain · city" (for EDEKA, "EDEKA <merchant> · city") from the existing `Chain` enum; grouping,
   nearest-store sorting and the at-store card work per store and need no change. The Bonuskaart
   remains Albert Heijn's.

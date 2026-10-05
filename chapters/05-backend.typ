@@ -103,7 +103,7 @@ that *an omitted tag fails safe*. The release script additionally runs
 `TestReleaseBinaryHasNoDevSession` and searches the built binary for the route string, aborting
 the release if it is present.
 
-== Stores, PDOK and address squatting
+== Stores, PDOK and address squatting <sec-stores>
 
 Stores are global facts keyed by filiaal number: every household that has a bon from store 4520
 refers to the same row. The address is *immutable once stored* (the first bon prevails), and a later
@@ -128,6 +128,10 @@ more harmful than a rare unverified address that remains rate-limited. PDOK coor
 MapKit coordinates once and are never overwritten; PDOK points with NaN, infinities or outside the
 Netherlands' bounding box are refused (a review finding: NaN fails every comparison, so a
 bounding-box check written as "reject if outside" must be written as "accept only if inside").
+
+#note(title: "Superseded (specified)")[Global store rows, their squatting defences and the
+server's PDOK lookups are to be replaced by sealed per-household stores (@sec-sealed-stores),
+because a store linked to the user who registered it reveals where that user shops.]
 
 == Protecting a shared database
 

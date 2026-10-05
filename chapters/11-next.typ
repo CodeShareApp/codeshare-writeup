@@ -18,6 +18,7 @@
   [German Pfandbons (REWE, EDEKA; Code 128)], [specified], [Two real bons; the REWE one not recognised by the scanner. Specification in @sec-rewe.],
   [Biesieklette parking tags (QR)], [specified], [New `parking` kind, location sealed; @sec-parking.],
   [Generic codes, boarding pass import], [specified], [Any code saved without questions; BCBP parsing, PDF and `.pkpass` import; @sec-any-code.],
+  [Sealed stores and code metadata], [specified], [Store rows per household, sealed; plaintext kind, status and timestamps dropped; ships with the wipe (@sec-sealed-stores).],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
 )
 
@@ -37,7 +38,8 @@
   Pfandbons are Code 128 without a printed store number, the specification is @sec-rewe.
 - *Paging* for `GET /api/sync` (a full resync returns everything in one response).
 - *PDOK street-level validation.* At present an address passes if PDOK finds it within the postcode; a
-  stricter check would compare the house number.
+  stricter check would compare the house number. Moot once stores are sealed (@sec-sealed-stores)
+  and the server validates nothing.
 - *Verification of the amount rule* against a second bon (whether the amount is indeed absent from
   the barcode).
 - *Expiry rules* per household, and the Apple Watch app (whether an Albert Heijn scanner reads an

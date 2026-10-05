@@ -8,7 +8,7 @@ cryptography.* All operations in this chapter run on the phones, in CryptoKit, i
 encodings are fixed by tests to vectors computed independently in Go (`crypto/ecdh`), so that a
 second client could reproduce them bit for bit.
 
-== Threat model
+== Threat model <sec-threats>
 
 The protected assets are barcodes worth a few euros each at a single store, and a loyalty card.
 Considered in isolation, these assets may not justify end-to-end encryption. The justification
