@@ -175,6 +175,19 @@ workarounds are placed behind `#if targetEnvironment(simulator)`: Vision must ru
 Engine: "Could not create inference context"), and the barcode request must use *revision 1*,
 because the current model finds nothing on the Simulator's CPU path.
 
+#lesson(title: "Found in use (6 October 2026)")[A photograph of a fresh Albert Heijn bon did not
+import from the gallery, while the live scanner read the same bon. An independent decoder
+(zxing-cpp) also failed on the photograph, at full and at reduced resolution, and succeeded once
+the strip left of the paper's edge was painted white: the Tomra prints the bars about three to four
+modules from the edge of the paper, where EAN-13 asks for eleven, and in a hand-held photograph
+the space beyond the edge is a dark hand or floor. A strict still-image decoder sees no quiet zone;
+the live scanner gets dozens of frames, some of them lucky. The remedy is a retry ladder in
+`PhotoCodeReader`: the picture as it is; then the paper found by `VNDetectDocumentSegmentationRequest`,
+perspective-corrected and placed on a white canvas with a wide margin; at full resolution, never
+below about three pixels per module. If all fail, the printed digits under the bars, read by OCR and
+accepted only with a valid check digit, supply the payload, as the parser already allows. A test
+fixture renders a made-up `980…` EAN-13 three modules from a dark border.]
+
 == Brightness <sec-brightness>
 
 A code screen raises the display to full brightness and restores the previous level afterwards.
