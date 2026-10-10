@@ -119,16 +119,26 @@ different structure:
 #dtable(
   columns: (auto, auto, 1fr),
   header: ("Digits", "Sample", "Meaning"),
-  [1–3], [`980`], [GS1's prefix for refund receipts.],
-  [4–8], [`62710`], [Not explained by anything printed.],
+  [1–3], [`980`], [`98` and one digit: `980` on this sample, `984` on the second (below). GS1 reserves `980` for refund receipts and `981`–`984` for coupons, so the third digit is not fixed.],
+  [4–8], [`62710`], [Not explained by anything printed; different on the second sample.],
   [9–11], [`076`], [Equal to the printed `Bon` counter (three digits).],
-  [12–31], [`21890550079700000000`], [Not explained by anything printed: neither the amount (`1347`), the date, nor the transaction line is among them.],
-  [32], [`7`], [A GS1 mod-10 check digit over digits 1–31 (weights 3, 1, 3, … from the right), as in EAN-13. It verified on the sample; one sample cannot exclude coincidence (one in ten).],
+  [12–15], [`2189`], [Not explained by anything printed.],
+  [16–31], [`0550` `0797` `0000` `0000`], [*Four amounts in cents*, one per deposit group. Their sum is the printed total: 5.50 + 7.97 = 13.47.],
+  [32], [`7`], [A GS1 mod-10 check digit over digits 1–31 (weights 3, 1, 3, … from the right), as in EAN-13. It verifies on both samples.],
 )
 
-Two observations matter more than the digits. First, the amount is absent from the barcode, as on
-the Albert Heijn bons and unlike the REWE one; a second Albert Heijn bon begins with the same `980`
-prefix, so the prefix belongs to Tomra's format rather than to one chain or country. Second, the lower half of the bon is *the same Tomra
+A second EDEKA Leergutbon, printed by a Tomra 9 in Berlin on 10 October 2026 and not reproduced
+here (it is unredeemed), confirmed the structure and corrected two assumptions. Its 32 digits
+begin with `984`, not `980`; its `Bon` counter sits at digits 9–11 as before; its check digit
+verifies; and digits 16–19 hold the bon's only amount, `0325` for € 3.25, followed by three groups
+of zeros. The first sample's amount had been missed because it is split over two groups. Its
+transaction line begins `606657-90360001-`, as on the first sample and on the Albert Heijn bons, so
+that part identifies Tomra's software rather than a store.
+
+Two observations matter more than the digits. First, the amount *is* in the barcode, as the sum of
+four cent groups, unlike on the Albert Heijn bons, whose 13-digit EAN-13 has no room for it. The
+`98x` prefix appears on Albert Heijn's Tomra bons too, so it belongs to Tomra's numbering rather
+than to one chain or country. Second, the lower half of the bon is *the same Tomra
 template* as the emballagebon (@fig-bon): a `Tomra 9` line, a transaction line of the form
 `NNNNNN-NNNNNNNN-NNNNN-NN`, and a timestamp `HH:mm:ss dd-MMM-yyyy` with upper-case month
 abbreviations. The layout of a voucher follows the *machine* that prints it as much as the chain
@@ -140,7 +150,7 @@ Compared field by field:
 #dtable(
   columns: (auto, 1fr, 1fr, 1fr),
   header: ("Field", "Albert Heijn emballagebon", "REWE Pfandbon", "EDEKA Leergutbon (Tomra)"),
-  [Barcode], [EAN-13, 13 digits, check digit.], [Code 128, 24 digits, no check digit.], [Code 128, 32 digits, prefix `980`, GS1 check digit.],
+  [Barcode], [EAN-13, 13 digits, check digit.], [Code 128, 24 digits, no check digit.], [Code 128, 32 digits, prefix `98x`, GS1 check digit, amount in four cent groups.],
   [Store key], [Filiaal number, printed.], [None printed; address (perhaps digits 1–12).], [None printed; merchant and address.],
   [Redeemable at], [Issuing store only.], [Issuing market only (assumed).], [Issuing market only (assumed).],
   [Address], [Street, then `NNNN AA` and city.], [Street (ranges such as `140-144`), then `NNNNN` and city.], [Street, then `NNNNN` and city.],
@@ -159,8 +169,8 @@ Compared field by field:
   EAN-13 only, which is why the REWE sample was not recognised. Add `.code128` to both. The
   `ScanAccumulator` rule "the most-seen *valid EAN-13* wins" becomes "the most-seen valid payload
   *per format* wins", where a format is a symbology plus a payload shape: EAN-13 with its check
-  digit; REWE, 24 digits whose last six parse as an amount; Tomra DE, 32 digits beginning `980`
-  with a valid GS1 check digit. A Code 128 payload of any other shape is saved as a generic
+  digit; REWE, 24 digits whose last six parse as an amount; Tomra DE, 32 digits beginning `98`
+  with a valid GS1 check digit, whose amount is the sum of the four groups at digits 16–31. A Code 128 payload of any other shape is saved as a generic
   code without questions (@sec-generic), so a new chain degrades to a stored, displayable code
   whose store and amount can be added later, rather than to "not recognised".
 - *Printed digits.* The REWE digits carry no check digit, so an OCR reading of them cannot be
@@ -171,7 +181,8 @@ Compared field by field:
 - *Cross-check.* A REWE Pfandbon has three amount sources that must agree: barcode digits 19–24,
   the `Total:` line and the sum of line items. A disagreement is shown on the confirmation form,
   with the barcode's value preselected (the till will use it regardless). A Tomra Leergutbon has
-  one source, the printed amount, and no line-item sum to fall back on.
+  three as well: the sum of the barcode's cent groups, the inverted amount and the total line
+  under the items.
 
 === Parsing
 
@@ -274,10 +285,11 @@ is shown as such rather than hidden, since a market may still accept it. Stores 
 
 == Open questions <sec-rewe-open>
 
-- *Unexplained digits.* REWE digits 1–12, EDEKA digits 4–8 and 12–31: market, machine, or date?
+- *Unexplained digits.* REWE digits 1–12, EDEKA digits 3, 4–8 and 12–15, and which deposit group
+  each EDEKA cent group stands for: market, machine, or date?
   One sample of each cannot say. A second bon from the same machine, one from another machine in
   the same market, and one from another market answer it, and decide the store key.
-- *Tomra elsewhere.* Whether German Tomra bons at other chains share the `980` format, and whether
+- *Tomra elsewhere.* Whether German Tomra bons at other chains share the `98x` format, and whether
   the Dutch Tomra template at Albert Heijn and the German one differ in more than the months.
 - *Screen scanning.* Whether German tills read a Code 128 from a phone screen has not been tested,
   and, because the paper is the bearer instrument, a market may refuse a screen even if its
