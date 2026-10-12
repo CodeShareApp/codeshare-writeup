@@ -3,26 +3,25 @@
 = A second Dutch chain: Dirk <sec-dirk>
 
 A *specification*, from two real statiegeldbonnen printed on 12 October 2026 in one Dirk van den
-Broek supermarket in The Hague, by two different machines. Both bons are unredeemed, so their
-barcode digits, bon numbers and transaction lines are not reproduced; the layouts are described
-with placeholders.
+Broek supermarket in The Hague, by two different machines. Both have since been redeemed, so their
+real values are given and serve as test vectors.
 
 == Two machines, two layouts
 
 #dtable(
   columns: (auto, 1fr, 1fr),
   header: ("Field", "Dirk, Tomra 70 Single", "Dirk, second machine (vendor not printed)"),
-  [Barcode], [EAN-13, prefix `980`, valid check digit.], [EAN-13, prefix `981`, valid check digit.],
-  [Amount in barcode], [No.], [No.],
+  [Barcode], [EAN-13 `9805621353327`, valid check digit.], [EAN-13 `9811073535563`, valid check digit.],
+  [Amount in barcode], [No (`060` does not occur).], [No; nor the bon or machine number.],
   [Heading], [`Statiegeldbon`; logo above.], [Logo only.],
   [Amount], [`€ 0.60`, white on black, point decimal (the Tomra NL template).], [`Totaal:Eur0,50`, comma decimal, no space after `Eur`.],
   [Line items], [`4x Blik 0.60`, then a count and total line.], [`2 × Pet 25ct Eur0,50`.],
   [Store], [Street and city only: `Torenstraat 132A`, `'s-Gravenhage`. *No postcode.*], [`Dirk`, street, postcode and city: `2513 BW Den Haag`.],
   [Store number], [None.], [None (a 11-digit `Machinenummer`).],
-  [Voucher number], [In the transaction line.], [`Bon-nummers: NNNNNN`.],
-  [Timestamp], [Tomra: `HH:mm:ss dd-MMM-yyyy`, Dutch months.], [`dd-MM-yyyy - HH:mm:ss`.],
+  [Voucher number], [In the transaction line.], [`Bon-nummers:175588`; `Machinenummer: 20231403701`.],
+  [Timestamp], [Tomra: `20:28:05 12-OKT-2026`.], [`12-10-2026 - 20:28:40`.],
   [Validity], [*Printed:* "Statiegeldbon is een jaar geldig na uitgifte".], [None printed.],
-  [Transaction line], [`800401-90370000-NNNNN-00`.], [None.],
+  [Transaction line], [`800401-90370000-15322-00`.], [None.],
 )
 
 == What changes in the spec

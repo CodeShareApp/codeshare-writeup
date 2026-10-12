@@ -23,6 +23,6 @@ codeshare-web in `~/working/codeshare/`). **Public:** fresh history, meant to be
   two German samples in chapter 12, cleared by the owner for real values: REWE (redeemed) and
   EDEKA (an old photo already public on the web). Their photos stay out, and so does the EDEKA
   merchant's name (a person's). Likewise the owner's used Biesieklette tag `RGF0057506` in
-  chapter 13 (the bike was collected with it).
+  chapter 13 (the bike was collected with it), and the two Dirk bons in chapter 17 (redeemed).
 - Images live in `images/`, referenced root-relative (`/images/...`); compile from the
   repository root.
