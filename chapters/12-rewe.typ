@@ -137,8 +137,8 @@ that part identifies Tomra's software rather than a store.
 
 Two observations matter more than the digits. First, the amount *is* in the barcode, as the sum of
 four cent groups, unlike on the Albert Heijn bons, whose 13-digit EAN-13 has no room for it. The
-`98x` prefix appears on Albert Heijn's Tomra bons too, so it belongs to Tomra's numbering rather
-than to one chain or country. Second, the lower half of the bon is *the same Tomra
+`98x` prefix appears on Albert Heijn's Tomra bons and on a non-Tomra machine at Dirk (@sec-dirk)
+too, so it marks a refund receipt in general, not one vendor, chain or country. Second, the lower half of the bon is *the same Tomra
 template* as the emballagebon (@fig-bon): a `Tomra 9` line, a transaction line of the form
 `NNNNNN-NNNNNNNN-NNNNN-NN`, and a timestamp `HH:mm:ss dd-MMM-yyyy` with upper-case month
 abbreviations. The layout of a voucher follows the *machine* that prints it as much as the chain

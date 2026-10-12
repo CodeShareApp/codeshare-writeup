@@ -22,6 +22,7 @@
   [Sealed stores and code metadata], [specified], [Store rows per household, sealed; plaintext kind, status and timestamps dropped; ships with the wipe (@sec-sealed-stores).],
   [Name "Code Share" (two words)], [decided], [Display name and share footer to change; identifiers stay `CodeShare`.],
   [Code wallet: cards, Apple Wallet passes], [specified], [Kind `card` (Bonuskaart, library card); passes signed from the manifest only; @sec-wallet.],
+  [Dirk statiegeldbonnen], [specified], [Two machines, both EAN-13 `98x`; no store number; printed one-year validity; @sec-dirk.],
   [Design pass], [waiting], [Three directions mocked; one is to be selected by the household.],
 )
 
