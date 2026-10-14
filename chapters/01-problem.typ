@@ -37,8 +37,9 @@ observation.]
 
 == Anatomy of a bon
 
-The parser in the app was developed against a single real bon (kept in `docs/` and still
-unredeemed; for this reason its barcode is not reproduced here). @fig-bon reproduces the layout
+The parser in the app was developed against a single real bon (kept in `docs/`; its barcode is
+not reproduced here, as the bon was unredeemed while this was written; it was redeemed on 14
+October 2026). @fig-bon reproduces the layout
 with fictitious values. The order of lines is stable, and the parser relies on it: the street is the line above the
 postcode, the amount follows "Emballagebon", the barcode digits are a line of 13 digits with a
 valid check digit.

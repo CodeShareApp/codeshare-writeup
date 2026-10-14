@@ -15,6 +15,7 @@ evening and replaced with a design selected by the owner from sketches: two fann
 
 The old icon remains in an early commit. For this reason `CLAUDE.md` prohibits pushing the
 repository anywhere until that bon is redeemed, and this document does not reproduce its digits.
+The bon was redeemed on 14 October 2026, which retired the rule.
 
 #lesson[Creative additions by an agent are output that requires review. Any real identifier (a
 barcode, a token, an address) is data that must not leak into artefacts, including decorative
